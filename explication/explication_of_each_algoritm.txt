@@ -1,0 +1,45 @@
+                                            Algoritmi SAT
+
+Algoritmii SAT (Satisfiability) sunt tehnici folosite pentru a determina dacă o formulă logică,
+ exprimată în forma clauzelor (CNF - Conjunctive Normal Form), este satisfiabilă, adică există
+ o combinație de valori (adevărat sau fals) pentru variabilele din formulă care face ca toate
+ clauzele să fie adevărate.
+
+Iată o descriere detaliată a fiecărui algoritm din codul tău:
+
+	1.	DPLL (Davis-Putnam-Logemann-Loveland):
+
+	•	Cum funcționează: Algoritmul DPLL folosește o abordare recursivă și se bazează pe backtracking.
+	    Începe prin a verifica dacă toate clauzele sunt deja satisfăcute. Dacă nu, alege o variabilă nealocată
+	    și o atribuie unei valori (adevărat sau fals). Apoi, continuă să verifice clauzele cu noul assignment.
+	    Dacă o clauză devine nesatisfăcută, revine (backtrack) și încearcă o altă valoare pentru variabila respectivă.
+	    Procesul continuă până când găsește o soluție satisfăcătoare sau epuizează toate posibilitățile.
+    	---- Output: Rezultatul poate fi Satisfiable (satisfiabil) sau Unsatisfiable (nesatisfiabil), iar assignment-ul
+	            este un dicționar cu valorile variabilelor, care poate fi gol dacă algoritmul nu găsește o soluție.
+
+	2.	CDCL (Conflict-Driven Clause Learning):
+
+	•	Cum funcționează: CDCL îmbunătățește DPLL prin învățarea din conflicte. Când se întâlnește o clauză
+	    nesatisfăcută, algoritmul analizează conflictul și învață o nouă clauză care exclude acea combinație de valori.
+	    Această clauză este adăugată la setul de clauze, îmbunătățind eficiența căutării. Algoritmul folosește backjumping
+	    pentru a reveni la un punct anterior din căutare în care poate face o alegere diferită.
+		---- Output: Similar cu DPLL, output-ul este fie Satisfiable, cu un assignment care satisface toate clauzele,
+	            fie Unsatisfiable, cu un assignment gol sau parțial.
+
+	3.	Max-SAT:
+
+	•	Cum funcționează: Max-SAT caută să maximizeze numărul de clauze satisfăcute. Algoritmul generează
+	    random assignments pentru variabile și numără câte clauze sunt satisfăcute cu fiecare assignment. Repetă
+	    acest proces de mai multe ori pentru a găsi cel mai bun assignment care satisface cele mai multe clauze,
+	    chiar dacă nu le satisface pe toate.
+	    ---- Output: Rezultatul este un indicator dacă toate clauzele sunt satisfăcute (true) sau nu (false),
+	            alături de un assignment care arată valorile variabilelor pentru care s-a obținut cel mai bun rezultat.
+
+	4.	GSAT (Greedy SAT):
+
+	•	Cum funcționează: GSAT începe cu un assignment aleatoriu și caută să îmbunătățească soluția printr-un
+	    număr limitat de “flip-uri”. La fiecare pas, algoritmul caută o clauză nesatisfăcută și alege o variabilă
+	    din acea clauză pentru a-i schimba valoarea (de la adevărat la fals sau invers). Continuă acest proces până
+	    ând găsește o soluție satisfăcătoare sau atinge limita de “flip-uri”.
+	    ---- Output: Poate returna fie Satisfiable, împreună cu un assignment care face toate clauzele adevărate,
+	            fie Unsatisfiable, cu un assignment parțial care nu satisface toate clauzele.
